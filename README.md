@@ -8,4 +8,5 @@ git clone https://github.com/pujari/gridfilter.git
 cd gridfilter
 npm install
 npm start
+http://localhost:8000/app/
 ```
