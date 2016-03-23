@@ -4,23 +4,24 @@
 			<ul class="list-group">
  				<button class="list-group-item list-group-item-success">
 					<strong>Name</strong>
-					<span type="button" class="btn-xs btn-warning pull-right" ng-click="search.country = ''">Reset</span>
+					<span type="button" class="btn-xs btn-warning pull-right" ng-click="search.countryName = ''">Reset</span>
 				</button>
 				<li class="list-group-item">
-					<input type="text" class="form-control" placeholder="Country Name" ng-model="search.country">
+					<input type="text" class="form-control" placeholder="Country Name" ng-model="search.countryName">
 				</li>
 			</ul>
 			<ul class="list-group">
 				<button type="button" class="list-group-item list-group-item-success">
-					<strong>Contains</strong>
-					<span type="button" class="btn-xs btn-warning pull-right" ng-click="search.country = ''">Reset</span>
+					<strong>Code</strong>
+					<span type="button" class="btn-xs btn-warning pull-right" ng-click="search.countryCode = ''">Reset</span>
 				</button>
 				<li class="list-group-item">
 					<div role="group" class="btn-group-xs">
-						<button type="button" class="btn btn-primary" ng-click="search.country = 'ar'">ar</button>
-						<button type="button" class="btn btn-primary" ng-click="search.country = 'ba'">ba</button>
-						<button type="button" class="btn btn-primary" ng-click="search.country = 'ja'">ja</button>
-						<button type="button" class="btn btn-primary" ng-click="search.country = 'un'">un</button>
+						<button type="button" class="btn btn-primary" ng-click="search.countryCode = 'AR'">AR</button>
+						<button type="button" class="btn btn-primary" ng-click="search.countryCode = 'IN'">IN</button>
+						<button type="button" class="btn btn-primary" ng-click="search.countryCode = 'US'">US</button>
+						<button type="button" class="btn btn-primary" ng-click="search.countryCode = 'BR'">BR</button>
+						<button type="button" class="btn btn-primary" ng-click="search.countryCode = 'IO'">IO</button>
 					</div>
 				</li>
 			</ul>
@@ -40,19 +41,33 @@
 			</ul>
 			<ul class="list-group">
 				<button type="button" class="list-group-item list-group-item-success">
-					<strong>Population (mil)</strong>
+					<strong>Population</strong>
 					<span type="button" class="btn-xs btn-warning pull-right" ng-click="minPop = 0;maxPop = MAX_POP;">Reset</span>
 				</button>
 				<li class="list-group-item">
 					<rzslider rz-slider-model="minPop"
 							  rz-slider-high="maxPop"
-							  rz-slider-options="slider.options"></rzslider>
+							  rz-slider-options="slider1.options"></rzslider>
+				</li>
+			</ul>
+			<ul class="list-group">
+				<button type="button" class="list-group-item list-group-item-success">
+					<strong>Area (sq km)</strong>
+					<span type="button" class="btn-xs btn-warning pull-right" ng-click="minArea = 0;maxArea = MAX_AREA;">Reset</span>
+				</button>
+				<li class="list-group-item">
+					<rzslider rz-slider-model="minArea"
+							  rz-slider-high="maxArea"
+							  rz-slider-options="slider2.options"></rzslider>
 				</li>
 			</ul>
 		</div>
 		<div class="col-md-9">
 			<div class="alert alert-warning" role="alert">
-				<h4><strong>Country</strong> ['%{{search.country}}%'] & <strong>Population</strong> [{{minPop}} - {{maxPop}}] : [<strong>{{filtered.length}}</strong> of {{countries.length}}]</h4>
+				<strong>Country</strong> ['%{{search.country}}%'],
+				<strong>Population</strong> [{{minPop}} - {{maxPop}}],
+				<strong>Area</strong> [{{minArea}} - {{maxArea}}] sqkm:
+				<h3>{{filtered.length}} of {{countries.length}} countries</h3>
 			</div>
 			<table class="table table-striped table-bordered table-hover table-condensed table-scrollable">
 			<thead>
@@ -61,10 +76,16 @@
 			</tr>
 			</thead>
 			<tbody>
-				<tr class="animate-repeat" ng-repeat="country in countries | filter:search | filter:byRange('population', minPop, maxPop) as filtered">
+				<tr class="animate-repeat" ng-repeat="country in countries |
+				filter:search |
+				filter:byRange('population', minPop, maxPop)|
+				filter:byRange('areaInSqKm', minArea, maxArea) as filtered">
+
 					<td> {{$index + 1}}</td>
-					<td> <span class="pull-left">{{country.country}}</span></td>
+					<td> <span class="pull-left">{{country.countryCode}}</span></td>
+					<td> <span class="pull-left">{{country.countryName}}</span></td>
 					<td> <span class="pull-left">{{country.population}}</span></td>
+					<td> <span class="pull-left">{{country.areaInSqKm}}</span></td>
 				</tr>
 			</tbody>
 			</table>
