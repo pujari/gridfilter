@@ -1,5 +1,5 @@
 <form class="form" ng-submit="submit()" ng-controller="GridFilterCtrl">
-	<div class = row>
+	<div class = "row">
 		<div class="col-md-3">
 			<ul class="list-group">
  				<button class="list-group-item">
@@ -28,11 +28,11 @@
 			<ul class="list-group">
 				<button type="button" class="list-group-item">
 					<strong>Population (mil)</strong>
-					<span type="button" class="btn-xs btn-warning pull-right" ng-click="minPop = 0;maxPop = MAX_POP;">Reset</span>
+					<span type="button" class="btn-xs btn-warning pull-right" ng-click="minPop = MIN_POP;maxPop = MAX_POP;">Reset</span>
 				</button>
 				<li class="list-group-item">
 					<div role="group" class="btn-group-xs">
-						<button type="button" class="btn btn-primary" ng-click="minPop = 0; maxPop = 10000000;"><10</button>
+						<button type="button" class="btn btn-primary" ng-click="minPop = MIN_POP; maxPop = 10000000;"><10</button>
 						<button type="button" class="btn btn-primary" ng-click="minPop = 10000000; maxPop = 50000000;">10-50</button>
 						<button type="button" class="btn btn-primary" ng-click="minPop = 50000000; maxPop = 100000000;">50-100</button>
 						<button type="button" class="btn btn-primary" ng-click="minPop = 100000000; maxPop = MAX_POP;">>100</button>
@@ -42,7 +42,7 @@
 			<ul class="list-group">
 				<button type="button" class="list-group-item">
 					<strong>Population</strong>
-					<span type="button" class="btn-xs btn-warning pull-right" ng-click="minPop = 0;maxPop = MAX_POP;">Reset</span>
+					<span type="button" class="btn-xs btn-warning pull-right" ng-click="minPop = MIN_POP;maxPop = MAX_POP;">Reset</span>
 				</button>
 				<li class="list-group-item">
 					<rzslider rz-slider-model="minPop"
@@ -53,7 +53,7 @@
 			<ul class="list-group">
 				<button type="button" class="list-group-item">
 					<strong>Area (sq km)</strong>
-					<span type="button" class="btn-xs btn-warning pull-right" ng-click="minArea = 0;maxArea = MAX_AREA;">Reset</span>
+					<span type="button" class="btn-xs btn-warning pull-right" ng-click="minArea = MIN_AREA;maxArea = MAX_AREA;">Reset</span>
 				</button>
 				<li class="list-group-item">
 					<rzslider rz-slider-model="minArea"
@@ -87,6 +87,7 @@
 					<td> <span class="pull-left">{{country.countryName}}</span></td>
 					<td> <span class="pull-left">{{country.population}}</span></td>
 					<td> <span class="pull-left">{{country.areaInSqKm}}</span></td>
+					<td> <span class="pull-left"><img src="..\app\images\{{country.countryCode}}.png" title="{{country.countryCode}}" hspace="4" vspace="2" height="40px"></img></span></td>
 				</tr>
 			</tbody>
 			</table>
