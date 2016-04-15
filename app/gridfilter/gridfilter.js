@@ -11,6 +11,7 @@ angular.module('myApp.gridfilter', ['ngRoute', 'angular-loading-bar'])
 
 .controller('GridFilterCtrl', ["$scope","$http", function($scope, $http){
 	//load countries data
+	$scope.view = 'flag';
 	$http.get('countries.json').success(function(response){
 		$scope.countries = response;
 

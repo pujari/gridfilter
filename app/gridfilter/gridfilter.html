@@ -73,15 +73,18 @@
 
 			<div class="row" style="height:40px;">
 				<a class="btn btn-default pull-left">
-				  	<i class="fa fa-table" ng-click="grid=true"></i>
+				  	<i class="glyphicon glyphicon-th pull-left" ng-click="view='grid'"></i>
 				</a>
 				<a class="btn btn-default pull-left">
-					<i class="fa fa-flag pull-left" ng-click="grid=false"></i>
+					<i class="glyphicon glyphicon-th-list pull-left" ng-click="view='list'"></i>
+				</a>
+				<a class="btn btn-default pull-left">
+					<i class="glyphicon glyphicon-flag pull-left" ng-click="view='flag'"></i>
 				</a>
 			</div>
 
 			<div class="row">
-				<table ng-show="grid" class="table table-striped table-bordered table-hover table-condensed table-scrollable">
+				<table ng-show="view=='grid'" class="table table-striped table-bordered table-hover table-condensed table-scrollable">
 				<thead>
 				<tr class="info">
 				<th class="animate-repeat" ng-repeat="val in labels">{{val}}</th>
@@ -107,7 +110,26 @@
 				</tbody>
 				</table>
 
-				<div ng-show="!grid" class="animate-repeat" ng-repeat="country in countries |
+				<ul ng-show="view=='list'" class="list-group">
+					<li class="list-group-item" class="animate-repeat" ng-repeat="country in countries |
+					filter:search |
+					filter:byRange('population', minPop, maxPop)|
+					filter:byRange('areaInSqKm', minArea, maxArea) as filtered">
+						<a href="#" class="list-group-item">
+							 <h4>
+							 	<img ng-src="..\app\images\{{country.countryCode}}.png"
+									fallback-src="..\app\images\error.png"
+									title="{{country.countryName}}" height="20px">
+								</img>
+								<span>{{country.countryName}}</span>
+								<span>{{country.areaInSqKm | number:0}} SqKm.</span>
+								<span>{{country.population | number:0}}</span>
+							 </h4>
+						</a>
+					</li>
+				</ul>
+				<!-- Flags View -->
+				<div ng-show="view=='flag'" class="animate-repeat" ng-repeat="country in countries |
 					filter:search |
 					filter:byRange('population', minPop, maxPop)|
 					filter:byRange('areaInSqKm', minArea, maxArea) as filtered">
@@ -118,7 +140,7 @@
 						</img>
 					</span>
 				</div>
-			</div>
-		</div>
-	<div>
+			</div><!-- row-->
+		</div><!-- col-md-9-->
+	<div><!-- row-->
 </form>
